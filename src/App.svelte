@@ -1,30 +1,33 @@
 <script>
-	export let name;
+  import store from "./store";
+  import Info from "./Info.svelte";
+  let firstName = "";
+  let lastName = "";
+
+  const addUser = (e) => {
+    let newStore = e.detail;
+    store.update((user) => [...user, newStore]);
+  };
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<Info {firstName} {lastName} on:user={addUser}>
+  <h1 slot="firstName">User Full name is</h1>
+  <h1 slot="lastName">User Full name is</h1>
+</Info>
+<ul>
+  {#each $store as user}
+    <li>{user}</li>
+  {/each}
+</ul>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  ul {
+   padding: 0 0 0 10px;
+   list-style: none;
+  }
+  li {
+    color: #ff3e00;
+    font-size: 1em;
+	margin: 10xp 0;
+  }
 </style>
