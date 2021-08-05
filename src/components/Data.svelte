@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
   let mainData = [];
   let fetchUrl = "https://restcountries.eu/rest/v2/name/united";
 
@@ -10,7 +11,7 @@
   });
 </script>
 
-<div class="d-flex data_wrapper">
+<div class="d-flex data_wrapper"  in:fade>
   <ul>
     <h3>Name</h3>
     {#each mainData as name, index}

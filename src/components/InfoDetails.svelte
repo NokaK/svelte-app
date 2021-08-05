@@ -4,29 +4,39 @@
 
   export let firstName;
   export let lastName;
+  let valid = true;
 
-  
   $: fullName = firstName + " " + lastName;
-  const handleClick = () => {
-    dispatch("user", fullName);
-    firstName = "";
-    lastName = "";
+  const handleSubmit = () => {
+    valid = true;
+    if (firstName.trim().length < 5) {
+      valid = false;
+    }
+    if (lastName.trim().length < 5) {
+      valid = false;
+    }
+    if (valid) {
+      dispatch("user", fullName);
+      firstName = "";
+      lastName = "";
+    }
   };
 </script>
 
-<div class="d-flex flex-column">
+<form class="d-flex flex-column" on:submit|preventDefault={handleSubmit}>
   <slot name="name" />
-  <input type="text" bind:value={firstName} />
+  <input type="text" bind:value={firstName} class:error={!valid} />
   <slot name="lastanme" />
-  <input type="text" bind:value={lastName} />
-  <button on:click={handleClick}>Add</button>
-</div>
+  <input type="text" bind:value={lastName} class:error={!valid} />
+  <button>Add</button>
+</form>
 
 <style>
   input {
     border-radius: 15px;
     padding: 10px 15px;
     margin: 15px 0 0;
+    border: 3px solid transparent
   }
   input:focus {
     outline: none;
@@ -42,8 +52,13 @@
     cursor: pointer;
     margin: 15px 0;
     font-weight: bold;
+   
   }
   button:hover {
     background-color: #273c3d;
+  }
+  .error {
+    border-color: crimson;
+    border-width: 3px;
   }
 </style>
