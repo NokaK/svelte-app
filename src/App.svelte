@@ -1,7 +1,7 @@
 <script>
   import Info from "./components/Info.svelte";
   import Data from "./components/Data.svelte";
-  import Tabs from "./Tabs.svelte";
+  import Tabs from "./components/Tabs.svelte";
 
   let tabNames = ["Add user", "View data"];
   let activeItem = "Add user";
