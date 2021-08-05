@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul {
+  padding: 0 0 0 10px;
+  list-style: none;
+}
+.list_number {
+  display: flex;
+  margin: 0 10px 0 0;
+}
+.list_number:after {
+  content: ".";
+  display: block;
+}
+.d-flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+.wrapper {
+  max-width: 450px;
+  margin: 0 auto;
+}

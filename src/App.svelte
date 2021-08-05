@@ -1,33 +1,32 @@
 <script>
-  import store from "./store";
-  import Info from "./Info.svelte";
-  let firstName = "";
-  let lastName = "";
+  import Info from "./components/Info.svelte";
+  import Data from "./components/Data.svelte";
+  import Tabs from "./Tabs.svelte";
 
-  const addUser = (e) => {
-    let newStore = e.detail;
-    store.update((user) => [...user, newStore]);
+  let tabNames = ["Add user", "View data"];
+  let activeItem = "Add user";
+
+  const tabChange = (e) => {
+    activeItem = e.detail;
   };
 </script>
 
-<Info {firstName} {lastName} on:user={addUser}>
-  <h1 slot="firstName">User Full name is</h1>
-  <h1 slot="lastName">User Full name is</h1>
-</Info>
-<ul>
-  {#each $store as user}
-    <li>{user}</li>
-  {/each}
-</ul>
+<div class="container">
+  <Tabs {tabNames} {activeItem} on:tabChange={tabChange} />
+  {#if activeItem === "Add user"}
+    <Info />
+  {:else if activeItem === "View data"}
+    <Data />
+  {/if}
+</div>
 
 <style>
-  ul {
-   padding: 0 0 0 10px;
-   list-style: none;
-  }
-  li {
-    color: #ff3e00;
-    font-size: 1em;
-	margin: 10xp 0;
+  .container {
+    min-height: 500px;
+    max-width: 940px;
+    padding: 50px;
+    margin: 0 auto;
+    background-color: #8ebec0;
+    border-radius: 5px;
   }
 </style>
