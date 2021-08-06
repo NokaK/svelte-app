@@ -9,7 +9,7 @@
   $: fullName = firstName + " " + lastName;
   const handleSubmit = () => {
     valid = true;
-    if (firstName.trim().length < 5) {
+    if (firstName.trim().length < 3) {
       valid = false;
     }
     if (lastName.trim().length < 5) {
@@ -24,9 +24,9 @@
 </script>
 
 <form class="d-flex flex-column" on:submit|preventDefault={handleSubmit}>
-  <slot name="name" />
+  <slot name="firstName" />
   <input type="text" bind:value={firstName} class:error={!valid} />
-  <slot name="lastanme" />
+  <slot name="lastName" />
   <input type="text" bind:value={lastName} class:error={!valid} />
   <button>Add</button>
 </form>
@@ -35,7 +35,7 @@
   input {
     border-radius: 15px;
     padding: 10px 15px;
-    margin: 15px 0 0;
+    margin: 10px 0 0;
     border: 3px solid transparent
   }
   input:focus {

@@ -22,7 +22,7 @@
 
 <style>
   .container {
-    min-height: 500px;
+    min-height: 700px;
     max-width: 940px;
     padding: 50px;
     margin: 0 auto;

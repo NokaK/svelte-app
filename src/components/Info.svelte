@@ -9,20 +9,27 @@
     let newStore = e.detail;
     store.update((user) => [...user, newStore]);
   };
+  const removeItem = (user) => {
+    store.update((storeItem) => {
+      return storeItem.filter((item) => item !== user);
+    });
+  };
 </script>
 
 <div class="wrapper">
   <div in:fade>
     <h1>Add User</h1>
     <InfoDetails {firstName} {lastName} on:user={addUser}>
-      <h1 slot="firstName">User Full name is</h1>
-      <h1 slot="lastName">User Full name is</h1>
+      <span class="label" slot="firstName">First Name</span>
+      <span class="label"slot="lastName">Last Name</span>
     </InfoDetails>
   </div>
   <ul>
+    <h2>User List</h2>
     {#each $store as user, index}
-      <li class="d-flex" in:scale>
+      <li class="d-flex">
         <span class="list_number">{index + 1}</span>{user}
+        <button class="delete" on:click={() => removeItem(user)}>X</button>
       </li>
     {/each}
   </ul>
@@ -40,5 +47,23 @@
     font-size: 1em;
     margin: 10px 0;
     font-weight: bold;
+  }
+  .delete {
+    color: red;
+    margin: 0 0 0 15px;
+    font-size: 1em;
+    cursor: pointer;
+    background: none;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 0 5px;
+  }
+  .label {
+    color: #fff;
+    margin: 15px 0 0;
+    font-size: 1em;
+  }
+  h2{
+    color: #fff;
   }
 </style>
